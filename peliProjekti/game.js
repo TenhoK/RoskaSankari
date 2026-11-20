@@ -76,3 +76,6 @@ function StopMusic()
     //musiikki.volume = 0.3;
     musiikki.stop();
 }
+
+
+//HALOOO
