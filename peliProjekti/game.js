@@ -13,6 +13,7 @@ let score = 0;
 function StartGame()
 {
     SpawnItem();
+    PlayMusic();
 }
 
 function PauseGame()
@@ -84,6 +85,10 @@ function ShowScreen(nimi)
     }
     document.getElementById(nimi).hidden = false;
 }
+//ShowScreen("menu");   // päävalikko
+//ShowScreen("game");   // peli
+//ShowScreen("pause");  // tauko
+//ShowScreen("over");   // loppu
 
 function UpdateHud()
 {
