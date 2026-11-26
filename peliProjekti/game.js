@@ -9,19 +9,18 @@ const items = [
     {nimi: "Muovipussi",    tyyppi: "Muovi",    kuva: "muovipussi.png"}
 ];
 
-// PISTEET
-let score = 0;
-
 // PELIN TILA ETC..
 let tila = "menu";          // MIKÄ TILANNE PELISSÄ ON MENOSSA
 let currentItem = null;     // "objekti" MITÄ LIIKUTELLAAN PELISSÄ
-let lastTime = 0;
+let lastTime = 0;           // AIKA PÄIVITETTY VIIMEKS
+let score = 0;              // PISTEET
 const keys = { left: false, right: false }; // NÄPPÄIMET VASEN JA OIKEE
 
 function StartGame()
 {
     document.getElementById("logo").hidden = true; // PISTETÄÄ LOGO PIILOO
     document.getElementById("startBtn").hidden = true; // PISTETÄÄ ALOTUSNAPPI PIILOO
+    document.getElementById("bins").hidden = false; // ROSKIKSET NÄKYVII
     tila = "playing"; // PISTETÄÄ PELI TILA PÄÄLLE
 
     SpawnItem();
@@ -58,6 +57,7 @@ function PiirräItem()
 function AddScore()
 {
     score++;
+    document.getElementById("score").textContent = score;
     PlaySound(aaniScore);
 }
 
@@ -70,20 +70,41 @@ function GameLoop(aika) // PELI LOOPPI
 
     const field = document.getElementById("playfield");
 
-    if (keys.left) currentItem.x -= 200 * time; // LIIKUTTAA VASEN
-    if (keys.right) currentItem.x += 200 * time; // LIIKUTTAA OIKEE
+    if (keys.left) currentItem.x -= 450 * time; // LIIKUTTAA VASEN
+    if (keys.right) currentItem.x += 450 * time; // LIIKUTTAA OIKEE
     currentItem.x = Math.max(0, Math.min(field.clientWidth - currentItem.objekti.clientWidth, currentItem.x));
 
-    currentItem.y += 100 * time; // LIIKUTTAA ALASPÄIN
+    currentItem.y += 150 * time; // LIIKUTTAA ALASPÄIN
     PiirräItem();
 
-    if (currentItem.y + currentItem.objekti.offsetHeight >= field.clientHeight)
+    const lattia = document.getElementById("bins").getBoundingClientRect().top - field.getBoundingClientRect().top;
+
+    if (currentItem.y + currentItem.objekti.offsetHeight >= lattia)
     {
-        currentItem.objekti.remove(); // POISTETAA KU ALHAAL JA SPAWNATAA UUS
-        SpawnItem();
+        ResolveItem();
     }
 
     requestAnimationFrame(GameLoop);
+}
+
+function ResolveItem()
+{
+    const itemRect = currentItem.objekti.getBoundingClientRect();
+    const keski = itemRect.left + itemRect.width / 2;
+
+    for (const bin of document.querySelectorAll(".bin"))
+    {
+        const roskis = bin.getBoundingClientRect();
+        const osuuAstiaan = keski >= roskis.left && keski <= roskis.right;
+
+        if (osuuAstiaan && bin.dataset.tyyppi === currentItem.tyyppi)
+        {
+            AddScore();
+        }
+    }
+
+    currentItem.objekti.remove();
+    SpawnItem();
 }
 
 // ========== NÄPPÄIN TOIMINNOT ============
@@ -167,7 +188,7 @@ function ResumeGame()
     requestAnimationFrame(GameLoop);
 }
 
-function QuitGame()        // Lopeta-nappi taukovalikossa
+function QuitGame()
 {
     EndGame();
 }

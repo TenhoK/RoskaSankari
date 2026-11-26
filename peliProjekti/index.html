@@ -10,7 +10,15 @@
     <button id="startBtn">
         <img src="assets/images/Aloita.png" alt="Aloita peli"> <!-- ALOITA BUTTON -->
     </button>
-    <div id="playfield"></div>
+    <div id="bins" hidden> <!-- ROSKIKSET -->
+        <img class="bin" data-tyyppi="Bio" src="assets/images/bio_bin.png" alt="Bio">
+        <img class="bin" data-tyyppi="Metalli" src="assets/images/metal_bin.png" alt="Metalli">
+        <img class="bin" data-tyyppi="Muovi" src="assets/images/plastic_bin.png" alt="Muovi">
+        <img class="bin" data-tyyppi="Kartonki" src="assets/images/paper_bin.png" alt="Kartonki">
+        <img class="bin" data-tyyppi="Lasi" src="assets/images/glass_bin.png" alt="Lasi">
+    </div>
+    <div id="hud">Pisteet: <span id="score">0</span></div> <!-- SCORE -->
+    <div id="playfield"></div> <!-- PELIKENTTÄ-->
     <script src="game.js"></script>
 </body>
 </html>
