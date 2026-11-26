@@ -1,40 +1,58 @@
 // PELIPROJEKTIN JAVASCRIPT TIEDOSTO
 
 // ITEMS
-const items = [{nimi: "Banaani", tyyppi: "Bio"},
-            {nimi: "Tölkki", tyyppi: "Metalli"},
-            {nimi: "Pahvilaatikko", tyyppi: "Kartonki"},
-            {nimi: "Lasipullo", tyyppi: "Lasi"},
-            {nimi: "Muovipussi", tyyppi: "Muovi"}];
+const items = [
+    {nimi: "Banaani",       tyyppi: "Bio",      kuva: "banaani.png"},
+    {nimi: "Tölkki",        tyyppi: "Metalli",  kuva: "tolkki.png"},
+    {nimi: "Pahvilaatikko", tyyppi: "Kartonki", kuva: "pahvilaatikko.png"},
+    {nimi: "Lasipullo",     tyyppi: "Lasi",     kuva: "lasipullo.png"},
+    {nimi: "Muovipussi",    tyyppi: "Muovi",    kuva: "muovipussi.png"}
+];
 
 // PISTEET
 let score = 0;
 
+// ---------- Pelin tila ----------
+let tila = "menu";          // menu | playing
+let currentItem = null;     // { el, x, y }
+let lastTime = 0;
+const keys = { left: false, right: false };
+
 function StartGame()
 {
+    document.getElementById("logo").hidden = true;
+    document.getElementById("startBtn").hidden = true;
+    tila = "playing";
+
     SpawnItem();
     PlayMusic();
-}
 
-function PauseGame()
-{
-    // TÄNNE PAUSE LOGIIKKA
+    lastTime = performance.now();
+    requestAnimationFrame(GameLoop);
 }
 
 function SpawnItem()
 {
-    const index = items.Math.floor(Math.random() * items.length);
+    const index = Math.floor(Math.random() * items.length);
     const item = items[index];
 
-    const objekti = document.createElement("div");
+    const objekti = document.createElement("img");      // div -> img
     objekti.className = "item";
+    objekti.src = "assets/images/" + item.kuva;
     objekti.textContent = item.nimi;
-    objekti.dataset.tyyppi = item.tyyppi;
 
-    objekti.style.left = "50%";
-    objekti.style.top = "0px";
+    const field = document.getElementById("playfield");
+    field.appendChild(objekti);
 
-    document.getElementById("playfield");
+    currentItem = { objekti: objekti, x: Math.random() * (field.clientWidth - objekti.offsetWidth), y: 0, tyyppi: item.tyyppi};
+
+    PiirräItem();
+}
+
+function PiirräItem()
+{
+    currentItem.objekti.style.left = currentItem.x + "px";
+    currentItem.objekti.style.top = currentItem.y + "px";
 }
 
 function AddScore()
@@ -42,6 +60,41 @@ function AddScore()
     score++;
     PlaySound(aaniScore);
 }
+
+function GameLoop(aika)
+{
+    if (tila !== "playing") return;
+
+    const time = (aika - lastTime) / 1000;
+    lastTime = aika;
+
+    const field = document.getElementById("playfield");
+
+    if (keys.left) currentItem.x -= 200 * time; // LIIKUTTAA VASEN
+    if (keys.right) currentItem.x += 200 * time; // LIIKUTTAA OIKEE
+    currentItem.x = Math.max(0, Math.min(field.clientWidth - currentItem.objekti.clientWidth, currentItem.x));
+
+    currentItem.y += 100 * time; // LIIKUTTAA ALASPÄIN
+    PiirräItem();
+
+    if (currentItem.y + currentItem.objekti.offsetHeight >= field.clientHeight)
+    {
+        currentItem.objekti.remove();
+        SpawnItem();
+    }
+
+    requestAnimationFrame(GameLoop);     // <-- ja tämä, aivan viimeiseksi
+}
+
+// ---------- Näppäimet ----------
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft")  keys.left = true;
+    if (e.key === "ArrowRight") keys.right = true;
+});
+document.addEventListener("keyup", (e) => {
+    if (e.key === "ArrowLeft")  keys.left = false;
+    if (e.key === "ArrowRight") keys.right = false;
+});
 
 // ==================== ÄÄNI JUTTUJA =====================
 const aaniClick = new Audio("assets/sounds/click.mp3");
@@ -124,7 +177,7 @@ function EndGame()
     tila = "over";
     StopMusic();
     PlaySound(aaniEnd);
-    if (currentItem) { currentItem.el.remove(); currentItem = null; }
+    if (currentItem) { currentItem.objekti.remove(); currentItem = null; }
     document.getElementById("finalScore").textContent = score;
     ShowScreen("over");
 }
