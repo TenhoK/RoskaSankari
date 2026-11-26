@@ -13,16 +13,16 @@ const items = [
 let score = 0;
 
 // PELIN TILA ETC..
-let tila = "menu";          // menu | playing
-let currentItem = null;     // { objekti, x, y }
+let tila = "menu";          // MIKÄ TILANNE PELISSÄ ON MENOSSA
+let currentItem = null;     // "objekti" MITÄ LIIKUTELLAAN PELISSÄ
 let lastTime = 0;
-const keys = { left: false, right: false };
+const keys = { left: false, right: false }; // NÄPPÄIMET VASEN JA OIKEE
 
 function StartGame()
 {
-    document.getElementById("logo").hidden = true;
-    document.getElementById("startBtn").hidden = true;
-    tila = "playing";
+    document.getElementById("logo").hidden = true; // PISTETÄÄ LOGO PIILOO
+    document.getElementById("startBtn").hidden = true; // PISTETÄÄ ALOTUSNAPPI PIILOO
+    tila = "playing"; // PISTETÄÄ PELI TILA PÄÄLLE
 
     SpawnItem();
     PlayMusic();
@@ -42,7 +42,7 @@ function SpawnItem()
     objekti.textContent = item.nimi;
 
     const field = document.getElementById("playfield");
-    field.appendChild(objekti);
+    field.appendChild(objekti); // LISÄTTÄN UUS OBJEKTI PELIKENTÄLLE
 
     currentItem = { objekti: objekti, x: Math.random() * (field.clientWidth - objekti.offsetWidth), y: 0, tyyppi: item.tyyppi};
 
@@ -61,9 +61,9 @@ function AddScore()
     PlaySound(aaniScore);
 }
 
-function GameLoop(aika)
+function GameLoop(aika) // PELI LOOPPI
 {
-    if (tila !== "playing") return;
+    if (tila !== "playing") return; // JOS EI PELAA NII PALAA
 
     const time = (aika - lastTime) / 1000;
     lastTime = aika;
