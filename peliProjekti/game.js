@@ -12,9 +12,9 @@ const items = [
 // PISTEET
 let score = 0;
 
-// ---------- Pelin tila ----------
+// PELIN TILA ETC..
 let tila = "menu";          // menu | playing
-let currentItem = null;     // { el, x, y }
+let currentItem = null;     // { objekti, x, y }
 let lastTime = 0;
 const keys = { left: false, right: false };
 
@@ -36,7 +36,7 @@ function SpawnItem()
     const index = Math.floor(Math.random() * items.length);
     const item = items[index];
 
-    const objekti = document.createElement("img");      // div -> img
+    const objekti = document.createElement("img"); // TEHDÄÄN UUS KUVA
     objekti.className = "item";
     objekti.src = "assets/images/" + item.kuva;
     objekti.textContent = item.nimi;
@@ -79,14 +79,14 @@ function GameLoop(aika)
 
     if (currentItem.y + currentItem.objekti.offsetHeight >= field.clientHeight)
     {
-        currentItem.objekti.remove();
+        currentItem.objekti.remove(); // POISTETAA KU ALHAAL JA SPAWNATAA UUS
         SpawnItem();
     }
 
-    requestAnimationFrame(GameLoop);     // <-- ja tämä, aivan viimeiseksi
+    requestAnimationFrame(GameLoop);
 }
 
-// ---------- Näppäimet ----------
+// ========== NÄPPÄIN TOIMINNOT ============
 document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft")  keys.left = true;
     if (e.key === "ArrowRight") keys.right = true;
