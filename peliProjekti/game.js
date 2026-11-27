@@ -81,7 +81,10 @@ function GameLoop(aika) // PELI LOOPPI
     if (keys.right) currentItem.x += 450 * time; // LIIKUTTAA OIKEE
     currentItem.x = Math.max(0, Math.min(field.clientWidth - currentItem.objekti.clientWidth, currentItem.x));
 
-    currentItem.y += 150 * time; // LIIKUTTAA ALASPÄIN
+    
+    if (score > 0) currentItem.y += 150 * time * (score); // LIIKUTTAA ALASPÄI
+    else currentItem.y += 150 * time; // LIIKUTTAA ALASPÄI
+
     PiirräItem();
 
     const lattia = document.getElementById("bins").getBoundingClientRect().top - field.getBoundingClientRect().top;
