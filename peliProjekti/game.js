@@ -91,30 +91,33 @@ function GameLoop(aika) // PELI LOOPPI
 
     if (currentItem.y + currentItem.objekti.offsetHeight >= lattia)
     {
-        ResolveItem();
+        TarkistaLajittelu();
     }
 
     requestAnimationFrame(GameLoop); // ALOITTAA FUNKTION UUDELLEEN
 }
 
-function ResolveItem()
+function TarkistaLajittelu()
 {
+    // ESINEEN SIJAINTI
     const itemRect = currentItem.objekti.getBoundingClientRect();
+    // LASKETAAN KESKIKOHT
     const keski = itemRect.left + itemRect.width / 2;
-
+    // KÄYDÄÄN LÄPI ROSKIKSET
     for (const bin of document.querySelectorAll(".bin"))
     {
+        // ROSKIKSEN SIJAINTI
         const roskis = bin.getBoundingClientRect();
         const osuuAstiaan = keski >= roskis.left && keski <= roskis.right;
-
+        // LISÄÄ SCORE JOS OSUU
         if (osuuAstiaan && bin.dataset.tyyppi === currentItem.tyyppi)
         {
             AddScore();
         }
     }
 
-    currentItem.objekti.remove();
-    SpawnItem();
+    currentItem.objekti.remove(); // POSIT VANHA ESINE
+    SpawnItem(); // LUODAAN UUS
 }
 
 // ========== NÄPPÄIN TOIMINNOT ============
