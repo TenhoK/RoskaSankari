@@ -8,6 +8,10 @@ const items = [
     {nimi: "Muovipussi",    tyyppi: "Muovi",    kuva: "muovipussi.png"}
 ];
 
+// omenankota.png TÄÄ ON BIO
+// metallipurkki.png TÄÄ ON METALLI
+// muovipullo.png TÄÄ ON MUOVI
+
 // PELI YLEISII JUTTUTUI..
 let tila = "menu";          // MIKÄ TILANNE PELISSÄ ON MENOSSA
 let currentItem = null;     // "objekti" MITÄ LIIKUTELLAAN PELISSÄ
