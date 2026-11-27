@@ -82,7 +82,7 @@ function GameLoop(aika) // PELI LOOPPI
     currentItem.x = Math.max(0, Math.min(field.clientWidth - currentItem.objekti.clientWidth, currentItem.x));
 
     
-    const nopeus = 150 + score * 15;   // LASKEE NOPEUDEN
+    const nopeus = 150 + score * 5;   // LASKEE NOPEUDEN
     currentItem.y += nopeus * time;    // LIIKUTTAA ALAS
 
     PiirräItem();
