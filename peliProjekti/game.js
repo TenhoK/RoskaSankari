@@ -1,36 +1,25 @@
 // PELIPROJEKTIN JAVASCRIPT TIEDOSTO
 
+// ÄÄNET
+const aaniClick = new Audio("assets/sounds/click.mp3");
+const aaniScore = new Audio("assets/sounds/score.mp3");
+const aaniEnd  = new Audio("assets/sounds/loppu.mp3");
+
+// MUSA
+const musiikki = new Audio("assets/sounds/musiikki.mp3");
+
 // ITEMS
-const items = [
-    {nimi: "Banaani",       tyyppi: "Bio",      kuva: "banaani.png"},
-    {nimi: "Omena",         tyyppi: "Bio",      kuva: "omenankota.png"},
-    {nimi: "Tolkki",        tyyppi: "Metalli",  kuva: "tolkki.png"},
-    {nimi: "Metallipurkki", tyyppi: "Metalli",  kuva: "metallipurkki.png"},
-    {nimi: "Pahvilaatikko", tyyppi: "Kartonki", kuva: "pahvilaatikko.png"},
-    {nimi: "Lasipullo",     tyyppi: "Lasi",     kuva: "lasipullo.png"},
-    {nimi: "Muovipussi",    tyyppi: "Muovi",    kuva: "muovipussi.png"},
-    {nimi: "Muovipullo",    tyyppi: "Muovi",    kuva: "muovipullo.png"}
-];
+const items = [{nimi: "Banaani", tyyppi: "Bio"},
+            {nimi: "Tölkki", tyyppi: "Metalli"},
+            {nimi: "Pahvilaatikko", tyyppi: "Kartonki"},
+            {nimi: "Lasipullo", tyyppi: "Lasi"},
+            {nimi: "Muovipussi", tyyppi: "Muovi"}];
 
-// omenankota.png TÄÄ ON BIO --
-// metallipurkki.png TÄÄ ON METALLI --
-// muovipullo.png TÄÄ ON MUOVI --
-
-// PELI YLEISII JUTTUTUI..
-let tila = "menu";          // MIKÄ TILANNE PELISSÄ ON MENOSSA
-let currentItem = null;     // "objekti" MITÄ LIIKUTELLAAN PELISSÄ
-let lastTime = 0;           // AIKA PÄIVITETTY VIIMEKS
-let score = 0;              // PISTEET
-const keys = { left: false, right: false }; // NÄPPÄIMET VASEN JA OIKEE
+// PISTEET
+let score = 0;
 
 function StartGame()
 {
-    document.getElementById("logo").hidden = true; // PISTETÄÄ LOGO PIILOO
-    document.getElementById("startBtn").hidden = true; // PISTETÄÄ ALOTUSNAPPI PIILOO
-    document.getElementById("bins").hidden = false; // ROSKIKSET NÄKYVII
-    document.getElementById("score").hidden = false // PISTETÄÄ LOGO PIILOO
-    tila = "playing"; // PISTETÄÄ PELI TILA PÄÄLLE
-
     SpawnItem();
     PlayMusic();
 
@@ -68,68 +57,6 @@ function AddScore()
     document.getElementById("score").textContent = score;
     PlaySound(aaniScore);
 }
-
-function GameLoop(aika) // PELI LOOPPI
-{
-    if (tila !== "playing") return; // JOS EI PELAA NII PALAA
-
-    const time = (aika - lastTime) / 1000;
-    lastTime = aika;
-
-    const field = document.getElementById("playfield");
-
-    const nopeus = 150 + score * 5;          // LASKEE PUTOAMISNOPEUDEN
-    const sivuNopeus = nopeus * 3;           // LASKEE SIVUTTAISNOPEUDEN
-
-    if (keys.left) currentItem.x -= sivuNopeus * time;    // LIIKUTTAA VASEMALLE
-    if (keys.right) currentItem.x += sivuNopeus * time;   // LIIKUTTAA OIKEALLE
-    currentItem.x = Math.max(0, Math.min(field.clientWidth - currentItem.objekti.clientWidth, currentItem.x));
-
-    currentItem.y += nopeus * time;          // LIIKUTTAA ALASPÄIN
-
-    PiirräItem();
-
-    const lattia = document.getElementById("bins").getBoundingClientRect().top - field.getBoundingClientRect().top;
-
-    if (currentItem.y + currentItem.objekti.offsetHeight >= lattia)
-    {
-        TarkistaLajittelu();
-    }
-
-    requestAnimationFrame(GameLoop); // ALOITTAA FUNKTION UUDELLEEN
-}
-
-function TarkistaLajittelu()
-{
-    // ESINEEN SIJAINTI
-    const itemRect = currentItem.objekti.getBoundingClientRect();
-    // LASKETAAN KESKIKOHT
-    const keski = itemRect.left + itemRect.width / 2;
-    // KÄYDÄÄN LÄPI ROSKIKSET
-    for (const bin of document.querySelectorAll(".bin"))
-    {
-        // ROSKIKSEN SIJAINTI
-        const roskis = bin.getBoundingClientRect();
-        const osuuAstiaan = keski >= roskis.left && keski <= roskis.right;
-        // LISÄÄ SCORE JOS OSUU
-        if (osuuAstiaan && bin.dataset.tyyppi === currentItem.tyyppi)
-        {
-            AddScore();
-        }
-    }
-    currentItem.objekti.remove(); // POSIT VANHA ESINE
-    SpawnItem(); // LUODAAN UUS
-}
-
-// ========== NÄPPÄIN TOIMINNOT ============
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft")  keys.left = true;
-    if (e.key === "ArrowRight") keys.right = true;
-});
-document.addEventListener("keyup", (e) => {
-    if (e.key === "ArrowLeft")  keys.left = false;
-    if (e.key === "ArrowRight") keys.right = false;
-});
 
 // ==================== ÄÄNI JUTTUJA =====================
 const aaniClick = new Audio("assets/sounds/click.mp3");
