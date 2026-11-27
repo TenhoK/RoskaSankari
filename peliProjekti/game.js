@@ -9,7 +9,7 @@ const items = [
     {nimi: "Muovipussi",    tyyppi: "Muovi",    kuva: "muovipussi.png"}
 ];
 
-// PELIN TILA ETC..
+// PELI YLEISII JUTTUTUI..
 let tila = "menu";          // MIKÄ TILANNE PELISSÄ ON MENOSSA
 let currentItem = null;     // "objekti" MITÄ LIIKUTELLAAN PELISSÄ
 let lastTime = 0;           // AIKA PÄIVITETTY VIIMEKS
@@ -84,7 +84,7 @@ function GameLoop(aika) // PELI LOOPPI
         ResolveItem();
     }
 
-    requestAnimationFrame(GameLoop);
+    requestAnimationFrame(GameLoop); // pyydä selainta kutsumaan tätä funktiota uudelleen
 }
 
 function ResolveItem()
@@ -145,11 +145,11 @@ function StopMusic()
 
 // ==================== BUTTONS =====================
 document.getElementById("startBtn").addEventListener("click", StartGame);
-document.getElementById("pauseBtn").addEventListener("click", PauseGame);
-document.getElementById("resumeBtn").addEventListener("click", ResumeGame);
-document.getElementById("quitBtn").addEventListener("click", QuitGame);
-document.getElementById("restartBtn").addEventListener("click", StartGame);
-document.getElementById("menuBtn").addEventListener("click", ToMenu);
+document.getElementById("pauseBtn").addEventListener("click", PauseGame); // TICO LISÄÄ TÄÄ SAMAL TAVAL HTML KU TOI LYMEPI startBtn on lisätty
+document.getElementById("resumeBtn").addEventListener("click", ResumeGame); // TICO LISÄÄ TÄÄ SAMAL TAVAL HTML KU TOI LYMEPI startBtn on lisätty
+document.getElementById("quitBtn").addEventListener("click", QuitGame); // TICO LISÄÄ TÄÄ SAMAL TAVAL HTML KU TOI LYMEPI startBtn on lisätty
+document.getElementById("restartBtn").addEventListener("click", StartGame); // TICO LISÄÄ TÄÄ SAMAL TAVAL HTML KU TOI LYMEPI startBtn on lisätty
+document.getElementById("menuBtn").addEventListener("click", ToMenu); // TICO LISÄÄ TÄÄ SAMAL TAVAL HTML KU TOI LYMEPI startBtn on lisätty
 
 // TÄÄAVAA SCRRENIN JA SULKEE MUUT
 function ShowScreen(nimi)
@@ -191,6 +191,7 @@ function ResumeGame()
 function QuitGame()
 {
     EndGame();
+    tila = "over";
 }
 
 function EndGame()
@@ -206,4 +207,5 @@ function EndGame()
 function ToMenu()
 {
     ShowScreen("menu");
+    tila = "menu";
 }
