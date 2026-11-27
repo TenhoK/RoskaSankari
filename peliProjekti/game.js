@@ -27,6 +27,7 @@ function StartGame()
     document.getElementById("logo").hidden = true; // PISTETÄÄ LOGO PIILOO
     document.getElementById("startBtn").hidden = true; // PISTETÄÄ ALOTUSNAPPI PIILOO
     document.getElementById("bins").hidden = false; // ROSKIKSET NÄKYVII
+    document.getElementById("score").hidden = false // PISTETÄÄ LOGO PIILOO
     tila = "playing"; // PISTETÄÄ PELI TILA PÄÄLLE
 
     SpawnItem();
@@ -115,7 +116,6 @@ function TarkistaLajittelu()
             AddScore();
         }
     }
-
     currentItem.objekti.remove(); // POSIT VANHA ESINE
     SpawnItem(); // LUODAAN UUS
 }
