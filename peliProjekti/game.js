@@ -1,5 +1,4 @@
 // PELIPROJEKTIN JAVASCRIPT TIEDOSTO
-
 // ITEMS
 const items = [
     {nimi: "Banaani",       tyyppi: "Bio",      kuva: "banaani.png"},
