@@ -2,10 +2,13 @@
 // ITEMS
 const items = [
     {nimi: "Banaani",       tyyppi: "Bio",      kuva: "banaani.png"},
+    {nimi: "Omena",         tyyppi: "Bio",      kuva: "omenakota.png"},
     {nimi: "Tölkki",        tyyppi: "Metalli",  kuva: "tolkki.png"},
+    {nimi: "Metallipurkki", tyyppi: "Metalli",  kuva: "metallipurkki.png"},
     {nimi: "Pahvilaatikko", tyyppi: "Kartonki", kuva: "pahvilaatikko.png"},
     {nimi: "Lasipullo",     tyyppi: "Lasi",     kuva: "lasipullo.png"},
     {nimi: "Muovipussi",    tyyppi: "Muovi",    kuva: "muovipussi.png"}
+    {nimi: "Muovipullo",    tyyppi: "Muovi",    kuva: "muovipullo.png"}
 ];
 
 // omenankota.png TÄÄ ON BIO
