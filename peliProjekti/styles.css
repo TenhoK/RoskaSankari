@@ -43,13 +43,13 @@ body {
     background-attachment: fixed;  
 }
 
-/* VEIKKA TEE TÄMMÖSII KU TÄÄ startBtn lisää mut nimillä: pauseBtn, resumeBtn, quitBtn, restartBtn, menuBtn */
+/* täs on napit */
+
 #startBtn {
-    z-index: 10; /* LAITEAAN Z 10 KOSKA MUUTEN JÄÄ TAUSTAN ALLE */
+    z-index: 10; /* Z 10 ettei mee taustan alle */
     position: absolute;
     left: 50%;
     top: calc(28% + 130px);
-    /* säädä 130px sopivaksi */
     transform: translateX(-50%);
     padding: 0;
     border: none;
@@ -60,10 +60,8 @@ body {
 #startBtn img {
     display: block;
     width: 220px;
-    /* KUVAN KOKO */
     max-width: 80vw;
     image-rendering: pixelated;
-    /* pitää pikselitaiteen terävänä */
     transition: transform 0.1s;
 }
 
@@ -75,13 +73,153 @@ body {
     transform: scale(0.96);
 }
 
+#pauseBtn {
+    z-index: 10; /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#pauseBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#pauseBtn:hover img {
+    transform: scale(1.06);
+}
+
+#pauseBtn:active img {
+    transform: scale(0.96);
+}
+
+#quitBtn {
+    z-index: 10; /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#quitBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#quitBtn:hover img {
+    transform: scale(1.06);
+}
+
+#quitBtn:active img {
+    transform: scale(0.96);
+}
+
+#resumeBtn {
+    z-index: 10; /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#resumeBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#resumeBtn:hover img {
+    transform: scale(1.06);
+}
+
+#resumeBtn:active img {
+    transform: scale(0.96);
+}
+
+#restartBtn {
+    z-index: 10; /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#restartBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#restartBtn:hover img {
+    transform: scale(1.06);
+}
+
+#restartBtn:active img {
+    transform: scale(0.96);
+}
+
+#menuBtn {
+    z-index: 10; /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#menuBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#menuBtn:hover img {
+    transform: scale(1.06);
+}
+
+#menuBtn:active img {
+    transform: scale(0.96);
+}
+
 #bins {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     display: flex;
-    justify-content: space-evenly; /* TASAISESTI */
+    justify-content: space-evenly;
     gap: 8px;
     z-index: 2;
 }
