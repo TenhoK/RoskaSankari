@@ -32,10 +32,8 @@
 
 body {
     margin: 0;
-    /* poistaa selaimen oletusmarginaalin, jotta ei tule vierityspalkkia */
     overflow: hidden;
-    /* ...taustakuvan rivit pysyvät ennallaan... */
-
+    /* TAUSTAN KOKO PYSYY SAMANA */
     background-image: url("assets/images/taustakuva.png");
     background-size: cover; 
     background-position: center;
