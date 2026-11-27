@@ -2,18 +2,19 @@
 // ITEMS
 const items = [
     {nimi: "Banaani",       tyyppi: "Bio",      kuva: "banaani.png"},
-    {nimi: "Omena",         tyyppi: "Bio",      kuva: "omenakota.png"},
-    {nimi: "Tölkki",        tyyppi: "Metalli",  kuva: "tolkki.png"},
+    {nimi: "Omena",         tyyppi: "Bio",      kuva: "omenankota.png"},
+    {nimi: "Tolkki",        tyyppi: "Metalli",  kuva: "tolkki.png"},
     {nimi: "Metallipurkki", tyyppi: "Metalli",  kuva: "metallipurkki.png"},
     {nimi: "Pahvilaatikko", tyyppi: "Kartonki", kuva: "pahvilaatikko.png"},
     {nimi: "Lasipullo",     tyyppi: "Lasi",     kuva: "lasipullo.png"},
-    {nimi: "Muovipussi",    tyyppi: "Muovi",    kuva: "muovipussi.png"}
+    {nimi: "Muovipussi",    tyyppi: "Muovi",    kuva: "muovipussi.png"},
     {nimi: "Muovipullo",    tyyppi: "Muovi",    kuva: "muovipullo.png"}
 ];
 
-// omenankota.png TÄÄ ON BIO
-// metallipurkki.png TÄÄ ON METALLI
-// muovipullo.png TÄÄ ON MUOVI
+// omenankota.png TÄÄ ON BIO --
+// metallipurkki.png TÄÄ ON METALLI --
+// muovipullo.png TÄÄ ON MUOVI --
+// 
 
 // PELI YLEISII JUTTUTUI..
 let tila = "menu";          // MIKÄ TILANNE PELISSÄ ON MENOSSA
@@ -90,7 +91,7 @@ function GameLoop(aika) // PELI LOOPPI
         ResolveItem();
     }
 
-    requestAnimationFrame(GameLoop); // pyydä selainta kutsumaan tätä funktiota uudelleen
+    requestAnimationFrame(GameLoop); // ALOITTAA FUNKTION UUDELLEEN
 }
 
 function ResolveItem()

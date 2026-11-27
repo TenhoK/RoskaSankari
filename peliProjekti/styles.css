@@ -42,6 +42,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;  
 }
+
 /* VEIKKA TEE TÄMMÖSII KU TÄÄ startBtn lisää mut nimillä: pauseBtn, resumeBtn, quitBtn, restartBtn, menuBtn */
 #startBtn {
     z-index: 10; /* LAITEAAN Z 10 KOSKA MUUTEN JÄÄ TAUSTAN ALLE */
