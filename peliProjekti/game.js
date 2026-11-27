@@ -77,13 +77,14 @@ function GameLoop(aika) // PELI LOOPPI
 
     const field = document.getElementById("playfield");
 
-    if (keys.left) currentItem.x -= 450 * time; // LIIKUTTAA VASEN
-    if (keys.right) currentItem.x += 450 * time; // LIIKUTTAA OIKEE
+    const nopeus = 150 + score * 5;          // LASKEE PUTOAMISNOPEUDEN
+    const sivuNopeus = nopeus * 3;           // LASKEE SIVUTTAISNOPEUDEN
+
+    if (keys.left) currentItem.x -= sivuNopeus * time;    // LIIKUTTAA VASEMALLE
+    if (keys.right) currentItem.x += sivuNopeus * time;   // LIIKUTTAA OIKEALLE
     currentItem.x = Math.max(0, Math.min(field.clientWidth - currentItem.objekti.clientWidth, currentItem.x));
 
-    
-    const nopeus = 150 + score * 5;   // LASKEE NOPEUDEN
-    currentItem.y += nopeus * time;    // LIIKUTTAA ALAS
+    currentItem.y += nopeus * time;          // LIIKUTTAA ALASPÄIN
 
     PiirräItem();
 
