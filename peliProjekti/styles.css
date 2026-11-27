@@ -1,11 +1,22 @@
+[hidden] {
+    display: none !important;
+    /* PIILOTTAA ELEMENTIN */
+}
+
 #playfield {
     position: relative;
-    height: 400px;
+    height: 100vh;
+    /* KOKOIKKUAN KORKEUS, ENNEN OLI: 400px */
     border: none;
 }
 
 .item {
     position: absolute;
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    /* PIKSELIT PYSYY TERÄVIN */
 }
 
 #logo {
@@ -22,11 +33,221 @@
 }
 
 body {
+    margin: 0;
+    /* poistaa selaimen oletusmarginaalin, jotta ei tule vierityspalkkia */
+    overflow: hidden;
+    /* ...taustakuvan rivit pysyvät ennallaan... */
+
     background-image: url("assets/images/taustakuva.png");
-    background-size: cover; 
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;  
+    background-attachment: fixed;
+}
+
+/* täs on napit */
+
+#startBtn {
+    z-index: 10;
+    /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#startBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#startBtn:hover img {
+    transform: scale(1.06);
+}
+
+#startBtn:active img {
+    transform: scale(0.96);
+}
+
+#pauseBtn {
+    z-index: 10;
+    /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#pauseBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#pauseBtn:hover img {
+    transform: scale(1.06);
+}
+
+#pauseBtn:active img {
+    transform: scale(0.96);
+}
+
+#quitBtn {
+    z-index: 10;
+    /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#quitBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#quitBtn:hover img {
+    transform: scale(1.06);
+}
+
+#quitBtn:active img {
+    transform: scale(0.96);
+}
+
+#resumeBtn {
+    z-index: 10;
+    /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#resumeBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#resumeBtn:hover img {
+    transform: scale(1.06);
+}
+
+#resumeBtn:active img {
+    transform: scale(0.96);
+}
+
+#restartBtn {
+    z-index: 10;
+    /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#restartBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#restartBtn:hover img {
+    transform: scale(1.06);
+}
+
+#restartBtn:active img {
+    transform: scale(0.96);
+}
+
+#menuBtn {
+    z-index: 10;
+    /* Z 10 ettei mee taustan alle */
+    position: absolute;
+    left: 50%;
+    top: calc(28% + 130px);
+    transform: translateX(-50%);
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#menuBtn img {
+    display: block;
+    width: 220px;
+    max-width: 80vw;
+    image-rendering: pixelated;
+    transition: transform 0.1s;
+}
+
+#menuBtn:hover img {
+    transform: scale(1.06);
+}
+
+#menuBtn:active img {
+    transform: scale(0.96);
+}
+
+#bins {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 8px;
+    z-index: 2;
+}
+
+.bin {
+    width: 18%;
+    max-width: 160px;
+    height: auto;
+    image-rendering: pixelated;
+}
+
+#hud {
+    position: fixed;
+    top: 12px;
+    left: 16px;
+    z-index: 2;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 0 #1f2a2e;
 }
 
 @keyframes logo-intro {
@@ -34,6 +255,7 @@ body {
         transform: translate(-50%, -50%) scale(0);
         opacity: 0;
     }
+
     to {
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
@@ -41,6 +263,13 @@ body {
 }
 
 @keyframes logo-float {
-    0%, 100% { transform: translate(-50%, -50%); }
-    50%      { transform: translate(-50%, calc(-50% - 12px)); }
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%);
+    }
+
+    50% {
+        transform: translate(-50%, calc(-50% - 12px));
+    }
 }
